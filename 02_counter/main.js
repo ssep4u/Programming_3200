@@ -1,4 +1,4 @@
-let count = 0;
+let count = 100;
 
 // HTML -> JS
 // const resultH1 = document.querySelectorAll("h1")[0];
@@ -16,6 +16,7 @@ const resultH1 = document.getElementById("result");
 //     // 숫자 표시하자
 //     resultH1.innerHTML = count;
 // });
+resultH1.innerHTML = count;
 function plus(number=1) {
     // 숫자 증가하자
     count += number;    //count += 1;   // count = count + 1;
