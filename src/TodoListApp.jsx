@@ -84,13 +84,13 @@ function TodoListApp() {
           deleteTodo={deleteTodo}
           editTodo={editTodo}
         />
-        {/* <TodoVoiceAdder /> */}
       </div>
       <TodoSearchBar
         onSearch={searchTodoHandle}
         search={search}
         setSearch={setSearch}
       />
+      <TodoVoiceAdder />
     </>
   );
 }
