@@ -88,7 +88,7 @@ function MusicPlayer() {
         }}>
             <audio
                 ref={audioRef}
-                src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                src="/산나비 BGM 하모니카 1시간 버전   SANABI.mp3"
                 loop
             />
             <button
