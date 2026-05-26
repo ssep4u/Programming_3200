@@ -9,6 +9,7 @@ import TodoAdder from "./components/TodoAdder.jsx";
 import TodoItem from "./components/TodoItem.jsx";
 import TodoList from "./components/TodoList.jsx";
 import TodoSearchBar from "./components/TodoSearchBar.jsx";
+import TodoVoiceAdder from "./components/TodoVoiceAdder.jsx";
 
 class Todo {
   constructor(id, text, isCompleted) {
@@ -90,7 +91,7 @@ function TodoListApp() {
         search={search}
         setSearch={setSearch}
       />
-      <TodoVoiceAdder />
+      <TodoVoiceAdder addTodo={addTodo} />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 
-export default function TodoVoiceAdder() {
-  const [isListening, setIsListning] = useState(false);
+export default function TodoVoiceAdder(props) {
+  const [isListening, setIsListening] = useState(false);
   const [content, setContent] = useState("");
 
   const recognitionRef = useRef(null);
@@ -15,37 +15,33 @@ export default function TodoVoiceAdder() {
     }
     const recognition = new SpeechRecognition();
     recognition.lang = "ko-KR";
-    recognition.contiuous = false;
+    recognition.continuous = false;
     recognition.interimResults = false;
 
     recognition.onresult = (e) => {
       // 시작 : 결과
-      const transcript = e.result[0][0].transcript;
+      const transcript = e.results[0][0].transcript;
       setContent(transcript);
+      props.addTodo(transcript);
       console.log(`인식 : ${transcript}`);
     };
 
     recognition.onend = () => {
       // 끝남
-      setIsListning(false);
+      setIsListening(false);
     };
 
-    recognition.onerror = (e) => {
-      console.error(e.error);
-      setIsListning(false);
-
-      recognition.current = recognition;
-    };
-  }, [isUserActive]);
+    recognitionRef.current = recognition;
+  }, []);
 
   const voiceAdderButtonHandler = () => {
-    setIsUserActive(!isUserActive);
+    if (!recognitionRef.current) return;
     if (isListening) {
       recognitionRef.current.stop();
-      setIsListning(false);
+      setIsListening(false);
     } else {
       recognitionRef.current.start();
-      setIsListning(true);
+      setIsListening(true);
     }
   };
 
