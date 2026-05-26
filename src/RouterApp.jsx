@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import CounterApp from './CounterApp.jsx'
 import TodoListApp from './TodoListApp.jsx'
@@ -14,7 +14,7 @@ const BG_COLORS = [
 ]
 
 function BgColorPicker({ bgColor, setBgColor }) {
-    return (
+    return (    
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', margin: '12px 0' }}>
             {BG_COLORS.map(({ label, value }) => (
                 <button
@@ -59,6 +59,57 @@ function LinkButtonPageApp({ bgColor, setBgColor }) {
     )
 }
 
+function MusicPlayer() {
+    const audioRef = useRef(null)
+    const [isPlaying, setIsPlaying] = useState(false)
+
+    function togglePlay() {
+        if (isPlaying) {
+            audioRef.current.pause()
+        } else {
+            audioRef.current.play()
+        }
+        setIsPlaying(!isPlaying)
+    }
+
+    return (
+        <div style={{
+            position: 'fixed',
+            bottom: '10px',
+            right: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            backgroundColor: 'rgba(255,255,255,0.85)',
+            border: '1px solid #ccc',
+            borderRadius: '24px',
+            padding: '6px 14px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+        }}>
+            <audio
+                ref={audioRef}
+                src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                loop
+            />
+            <button
+                onClick={togglePlay}
+                style={{
+                    background: 'none',
+                    border: 'none',
+                    fontSize: '1.4rem',
+                    cursor: 'pointer',
+                    lineHeight: 1,
+                }}
+            >
+                {isPlaying ? '⏸' : '▶️'}
+            </button>
+            <span style={{ fontSize: '0.85rem', color: '#555' }}>
+                {isPlaying ? '재생 중' : '배경음악'}
+            </span>
+        </div>
+    )
+}
+
 export default function RouterApp() {
     const [bgColor, setBgColor] = useState('#ffffff')
 
@@ -71,6 +122,7 @@ export default function RouterApp() {
                     <Route path="/todolistapp" element={<TodoListApp />} />
                 </Routes>
             </BrowserRouter>
+            <MusicPlayer />
         </div>
     )
 }
