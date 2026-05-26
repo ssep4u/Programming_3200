@@ -41,3 +41,4 @@ npm create vite@latest .
 - `useNavigate()`
 - 3209윤시웅
 -3214 장세은
+- 3214 장세은  3-1	추가할 때 맨 위에 표시 하자	★	addTodo() 수정
