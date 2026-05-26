@@ -30,6 +30,23 @@
 .todo__button--add {
     background-color: #4984e4;
 }
+.todo-search {
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+.todo-search input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.todo-search input:focus {
+    border-color: #4984e4;
+}
 .todo__item {
     display: flex;
     align-items: center;    /* 높이 가운데 정렬 */
