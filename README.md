@@ -39,3 +39,5 @@ npm create vite@latest .
   <Link to="/"></Link>
   ```
 - `useNavigate()`
+
+- 3216 지수민 3-9	완료 정렬	★★	completed 값 기준 정렬
