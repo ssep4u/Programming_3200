@@ -8,6 +8,7 @@ import TodoHeader from "./components/TodoHeader.jsx";
 import TodoAdder from "./components/TodoAdder.jsx";
 import TodoItem from "./components/TodoItem.jsx";
 import TodoList from "./components/TodoList.jsx";
+import TodoSearchBar from "./components/TodoSearchBar.jsx";
 
 class Todo {
   constructor(id, text, isCompleted) {
@@ -27,9 +28,14 @@ function TodoListApp() {
     return !savedTodos ? [] : JSON.parse(savedTodos); //string -> JSON 객체 또는 리스트
   };
   const [todos, setTodos] = useState(initTodos);
+  const [selectedTodos, setSelectedTodos] = useState(todos);
+  const [search, setSearch] = useState("");
   //todos 변경 시, LocalStorage에 todos 저장하자
   useEffect(() => {
     localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos)); //JSON 객체 또는 리스트 -> string
+    if (search === "") {
+      setSelectedTodos(todos);
+    }
   }, [todos]);
 
   function addTodo(text) {
@@ -62,18 +68,30 @@ function TodoListApp() {
       todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo))
     );
   }
+
+  const searchTodoHandle = (todoName) => {
+    setSelectedTodos(todos.filter((v) => v.text.includes(todoName)));
+  };
+
   return (
-    <div className="todo">
-      <TodoHeader />
-      <TodoAdder addTodo={addTodo} />
-      <TodoList
-        todos={todos}
-        toggleTodo={toggleTodo}
-        deleteTodo={deleteTodo}
-        editTodo={editTodo}
+    <>
+      <div className="todo">
+        <TodoHeader />
+        <TodoAdder addTodo={addTodo} />
+        <TodoList
+          todos={selectedTodos}
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
+          editTodo={editTodo}
+        />
+        {/* <TodoVoiceAdder /> */}
+      </div>
+      <TodoSearchBar
+        onSearch={searchTodoHandle}
+        search={search}
+        setSearch={setSearch}
       />
-      <TodoVoiceAdder />
-    </div>
+    </>
   );
 }
 
