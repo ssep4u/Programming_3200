@@ -1,62 +1,119 @@
-.todo {
-    width: max(80%, 400px);  /* 최소: 400px */
-    margin: 20px auto;  /* 20px:위아래 auto:가운데정렬 */
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+@font-face {
+    font-family: "OkMallang";
+    src: url("./assets/fonts/OkMallang_B.ttf") format("truetype");
+    font-weight: bold;
 }
+
+@font-face {
+    font-family: 'omyupretty';
+    src: url('./assets/fonts/omyupretty.ttf') format('truetype');
+    font-weight: normal;
+}
+
+.todo {
+    font-family: "OkMallang", sans-serif;
+    font-size: 1.15rem;
+
+    width: max(80%, 400px);
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #F9F9F9;
+    border-radius: 15px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+}
+
 .todo__form {
     display: flex;
     padding: 10px;
     margin-bottom: 10px;
 }
+
 .todo__input {
     padding: 10px;
     font-size: 1.2em;
     border: 1px solid #ccc;
     border-radius: 8px;
     margin-right: 10px;
-    flex: 1;   /* flex 공간의 나머지 여백 만큼 늘리자 */
+    flex: 1;
+    font-family: 'omyupretty', sans-serif;
 }
+
 .todo__button {
     padding: 10px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;    /* 마우스 손가락 */
+    cursor: pointer;
     font-size: 1.2em;
     color: #fff;
+    font-family: 'omyupretty', sans-serif;
 }
+
 .todo__button--add {
     background-color: #4984e4;
 }
+
 .todo__item {
     display: flex;
-    align-items: center;    /* 높이 가운데 정렬 */
+    align-items: center;
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #eee;
-    gap: 10px;    /* flex된 item 사이의 여백 */
+    gap: 10px;
 }
+
 .todo__check {
     width: 20px;
     height: 20px;
     cursor: pointer;
-    accent-color: #999;    /* 체크한 배경색: 눈에 안띄게 */
+    accent-color: #999;
 }
+
 .todo__label {
     flex: 1;
+    margin-left: auto;
+    font-family: 'omyupretty', sans-serif;
+    font-size: 1.1rem;
 }
+
+.todo__input,
 .todo__input--edit {
-    flex-grow: 1;
+    font-family: 'omyupretty', sans-serif;
+    font-size: 1.1rem;
 }
-.todo__button--edit,
-.todo__button--delete {
-    font-size: 0.8em;
+
+.todo__button {
+    font-family: 'omyupretty', sans-serif;
+    font-size: 1rem;
 }
-.todo__item--complete .todo__label  {
+
+.todo__item--complete .todo__label {
     text-decoration: line-through;
     color: #999;
 }
-/* A > B  : A 바로 아래 자식 B
-A B    : A 아래 자손 B */
+
+.todo__date {
+    font-family: 'omyupretty', sans-serif;
+    font-size: 1rem;
+    color: #666666;
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+.todo__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.todo__title {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.todo__music-button {
+    font-size: 20px;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
