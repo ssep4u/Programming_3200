@@ -14,6 +14,8 @@ class Todo {
     this.id = id;
     this.text = text;
     this.isCompleted = isCompleted;
+    this.startedAt = Date.now();  // 생성 시점 저장: 완료까지 걸린 시간 계산 기준
+    this.completedAt = null;     // 완료 시점 저장: 완료로 변경할 때 Date.now()로 설정
   }
 }
 const TODOS_STORAGE_KEY = "todos";  //LocalStorage 용 key
@@ -48,9 +50,17 @@ function TodoListApp() {
     setTodos((todos) =>
       // todos에서 하나씩 꺼내서, todo, 꺼낸 todo의 id와 id 가 같다면,
       // 새 객체 만들어서 todo 값 복사, 속성 수정
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-      )
+      todos.map((todo) => {
+        if (todo.id !== id) return todo;
+        const nextCompleted = !todo.isCompleted;
+        return {
+          ...todo,
+          isCompleted: nextCompleted,
+          completedAt: nextCompleted ? Date.now() : null,
+          startedAt: todo.startedAt ?? todo.id,
+
+        };
+      })
     )
   }
   function deleteTodo(id) {

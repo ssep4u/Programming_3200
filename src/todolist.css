@@ -38,6 +38,11 @@
     border-bottom: 1px solid #eee;
     gap: 10px;    /* flex된 item 사이의 여백 */
 }
+.todo__duration {
+    font-size: 0.85em;
+    color: #666;
+    margin-left: 10px;
+}
 .todo__check {
     width: 20px;
     height: 20px;

@@ -41,3 +41,4 @@ npm create vite@latest .
 - `useNavigate()`
 
 - 3216 지수민 3-9	완료 정렬	★★	completed 값 기준 정렬
+- 3216 지수민 2-12	완료하면 걸린 시간 알림	★★★	시작시간/완료시간 저장, 시간 계산
