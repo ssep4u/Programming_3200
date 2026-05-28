@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'OngleipParkDahyeon';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+body{
+    font-family: 'OngleipParkDahyeon';
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
 .todo {
     width: max(80%, 400px);  /* 최소: 400px */
     margin: 20px auto;  /* 20px:위아래 auto:가운데정렬 */
@@ -12,6 +24,7 @@
     margin-bottom: 10px;
 }
 .todo__input {
+    font-family: 'OngleipParkDahyeon';
     padding: 10px;
     font-size: 1.2em;
     border: 1px solid #ccc;
@@ -20,6 +33,7 @@
     flex: 1;   /* flex 공간의 나머지 여백 만큼 늘리자 */
 }
 .todo__button {
+    font-family: 'OngleipParkDahyeon';
     padding: 10px;
     border: none;
     border-radius: 8px;
