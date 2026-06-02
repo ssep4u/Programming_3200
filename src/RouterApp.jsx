@@ -18,8 +18,10 @@ function BgColorPicker({ bgColor, setBgColor }) {
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', margin: '12px 0' }}>
             {BG_COLORS.map(({ label, value }) => (
                 <button
+                    type="button"
                     key={value}
                     onClick={() => setBgColor(value)}
+                    aria-label={label}
                     title={label}
                     style={{
                         width: '36px',
