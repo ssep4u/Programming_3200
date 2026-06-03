@@ -68,11 +68,15 @@ function TodoListApp() {
       )
     )
   }
+
+  function alldelete(){
+    setTodos([]);
+  }
   return (
     <div className="todo">
       
       <TodoHeader /><DateApp/>
-    
+      <button onClick={alldelete} className='delete-all-btn'>전체삭제</button>
       <TodoAdder addTodo={addTodo} />
       <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
     </div>
