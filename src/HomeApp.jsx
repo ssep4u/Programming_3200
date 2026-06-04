@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CounterApp from './CounterApp.jsx'
 import TodoListApp from './TodoListApp.jsx'
+import TodolistSearch from './components/TodoSearch.jsx'
 
 const BG_COLORS = [
   { label: '흰색', value: '#ffffff' },

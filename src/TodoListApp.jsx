@@ -8,6 +8,7 @@ import TodoHeader from "./components/TodoHeader.jsx"
 import TodoAdder from "./components/TodoAdder.jsx"
 import TodoItem from "./components/TodoItem.jsx"
 import TodoList from "./components/TodoList.jsx"
+import TodoSearch from "./components/TodoSearch.jsx"
 import DateApp from './DateApp.jsx'
 
 class Todo {
@@ -28,10 +29,15 @@ function TodoListApp() {
     return (!savedTodos) ? [] : JSON.parse(savedTodos); //string -> JSON 객체 또는 리스트
   }
   const [todos, setTodos] = useState(initTodos);
-  //todos 변경 시, LocalStorage에 todos 저장하자
+  const [filteredTodos, setFilteredTodos] = useState(initTodos);
   useEffect(() => {
     localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos)); //JSON 객체 또는 리스트 -> string
   }, [todos]);
+
+  useEffect(() => {
+    setFilteredTodos(todos);
+  }, [todos]);
+
 
 
   function addTodo(text) {
@@ -68,14 +74,24 @@ function TodoListApp() {
       )
     )
   }
+
   return (
     <div className="todo">
       
       <TodoHeader /><DateApp/>
     
       <TodoAdder addTodo={addTodo} />
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
+      {/* 검색 */}
+      <TodoSearch todos={todos} setFilteredTodos={setFilteredTodos} />
+      {/* 검색 결과 출력 */}
+      <TodoList
+        todos={filteredTodos}
+        toggleTodo={toggleTodo}
+        deleteTodo={deleteTodo}
+        editTodo={editTodo}
+      />
     </div>
+
   )
 }
 
