@@ -28,8 +28,7 @@ function TodoListApp() {
     return (!savedTodos) ? [] : JSON.parse(savedTodos); //string -> JSON 객체 또는 리스트
   }
   const [todos, setTodos] = useState(initTodos);
-  const [filteredTodos, setFilteredTodos] = useState(initTodos());
-  //todos 변경 시, LocalStorage에 todos 저장하자
+  const [filteredTodos, setFilteredTodos] = useState(initTodos);
   useEffect(() => {
     localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos)); //JSON 객체 또는 리스트 -> string
   }, [todos]);
