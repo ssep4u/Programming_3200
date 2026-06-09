@@ -1,13 +1,13 @@
 // https://programming-3200.ssep4u.workers.dev/
-import { useState, useEffect } from 'react'
-import "./todolist.css"
-import Button from "./components/Button.jsx"
-import Checkbox from "./components/Checkbox.jsx"
-import TodoItemEmpty from "./components/TodoItemEmpty.jsx"
-import TodoHeader from "./components/TodoHeader.jsx"
-import TodoAdder from "./components/TodoAdder.jsx"
-import TodoItem from "./components/TodoItem.jsx"
-import TodoList from "./components/TodoList.jsx"
+import { useState, useEffect, useMemo } from "react";
+import "./todolist.css";
+import Button from "./components/Button.jsx";
+import Checkbox from "./components/Checkbox.jsx";
+import TodoItemEmpty from "./components/TodoItemEmpty.jsx";
+import TodoHeader from "./components/TodoHeader.jsx";
+import TodoAdder from "./components/TodoAdder.jsx";
+import TodoItem from "./components/TodoItem.jsx";
+import TodoList from "./components/TodoList.jsx";
 import TodoSearch from "./components/TodoSearch.jsx"
 import DateApp from './DateApp.jsx'
 
@@ -18,7 +18,7 @@ class Todo {
     this.isCompleted = isCompleted;
   }
 }
-const TODOS_STORAGE_KEY = "todos";  //LocalStorage 용 key
+const TODOS_STORAGE_KEY = "todos"; //LocalStorage 용 key
 
 function TodoListApp() {
   const initTodos = () => {
@@ -26,19 +26,13 @@ function TodoListApp() {
     const savedTodos = localStorage.getItem(TODOS_STORAGE_KEY);
     //값이 없으면 []
     //값이 있으면 todos의 초기값 대입하자
-    return (!savedTodos) ? [] : JSON.parse(savedTodos); //string -> JSON 객체 또는 리스트
-  }
+    return !savedTodos ? [] : JSON.parse(savedTodos); //string -> JSON 객체 또는 리스트
+  };
   const [todos, setTodos] = useState(initTodos);
   const [filteredTodos, setFilteredTodos] = useState(initTodos);
   useEffect(() => {
     localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos)); //JSON 객체 또는 리스트 -> string
   }, [todos]);
-
-  useEffect(() => {
-    setFilteredTodos(todos);
-  }, [todos]);
-
-
 
   function addTodo(text) {
     //이전 todos에 newTodo 만들어서 추가하자 -> 그것을 setTodos() 하자
@@ -56,29 +50,39 @@ function TodoListApp() {
       // todos에서 하나씩 꺼내서, todo, 꺼낸 todo의 id와 id 가 같다면,
       // 새 객체 만들어서 todo 값 복사, 속성 수정
       todos.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-      )
-    )
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo,
+      ),
+    );
   }
   function deleteTodo(id) {
     // todos를 하나씩 꺼내어 todo, todo.id === id
-    setTodos((todos) =>
-      todos.filter((todo) => todo.id !== id)
-    )
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
   }
   function editTodo(id, newText) {
     //todos 하나씩 꺼내어 todo. id가 같으면 text: newText
     setTodos((todos) =>
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, text: newText } : todo
-      )
-    )
+      todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo)),
+    );
   }
+  // 진행률 계산: 완료된 todo 개수 / 전체 todo 개수
+  const { completedCount, totalCount, percent } = useMemo(() => {
+    const completedCount = todos.filter((todo) => todo.isCompleted).length;
+    const totalCount = todos.length;
+    const percent =
+      totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
+    return { completedCount, totalCount, percent };
+  }, [todos]);
 
   return (
     <div className="todo">
       
-      <TodoHeader /><DateApp/>
+      <TodoHeader
+        completedCount={completedCount}
+        totalCount={totalCount}
+        percent={percent}
+      />
+    
+    <DateApp/>
     
       <TodoAdder addTodo={addTodo} />
       {/* 검색 */}
@@ -91,8 +95,7 @@ function TodoListApp() {
         editTodo={editTodo}
       />
     </div>
-
-  )
+  );
 }
 
-export default TodoListApp
+export default TodoListApp;
