@@ -39,6 +39,8 @@ npm create vite@latest .
   <Link to="/"></Link>
   ```
 - `useNavigate()`
+
+- 3216 지수민 3-9	완료 정렬	★★	completed 값 기준 정렬
 - 3215 정다운 3-2 검색기능 ★★	검색어 state, filter()	
 - 3207 육준성 3-1: 추가할 때 맨 위에 표시하자
 - 3202 김효일 1-1	날짜 표시?	★	Date, 컴포넌트 렌더링
