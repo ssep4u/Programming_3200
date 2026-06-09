@@ -6,6 +6,31 @@
     border-radius: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.todo__header {
+    margin-bottom: 10px;
+}
+.todo__progress {
+    padding: 0 10px;
+}
+.todo__progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 6px;
+}
+.todo__progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #e6e6e6;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.todo__progress-bar-fill {
+    height: 100%;
+    background-color: #4984e4;
+    transition: width 0.3s ease;
+}
 .todo__form {
     display: flex;
     padding: 10px;

@@ -3,10 +3,11 @@ import Button from "./Button.jsx";
 import { useState } from "react";
 
 export default function TodoItem({ todo, toggleTodo, deleteTodo, editTodo }) {
-    const [isEditing, setIsEditing] = useState(false);  // 수정중인지 아닌지
-    const [editText, setEditText] = useState(todo.text);    // 수정중인 text
-    function handletEditClick() {
-        if (!isEditing) {    // edit 시작
+    todo.date = new Date(todo.id).toLocaleString();
+    const [isEditing, setIsEditing] = useState(false);  //수정중인지 아닌지
+    const [editText, setEditText] = useState(todo.text);    //수정중인 text
+    function handleEditClick() {
+        if (!isEditing) {   //edit 시작
             setIsEditing(true);
             setEditText(todo.text);
         } else {    // edit 끝
@@ -46,11 +47,7 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo, editTodo }) {
                     autoFocus
                 />
             }
-
-            <span className="todo__date">
-                {todo.updatedAt}
-            </span>
-            
+            <span>날짜 : {todo.date}</span>
             <Button
                 className='todo__button todo__button--edit'
                 onClick={handletEditClick}
