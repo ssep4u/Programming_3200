@@ -75,15 +75,15 @@ function TodoListApp() {
 
   return (
     <div className="todo">
-      
+
       <TodoHeader
         completedCount={completedCount}
         totalCount={totalCount}
         percent={percent}
       />
-    
-    <DateApp/>
-    
+
+      <DateApp />
+
       <TodoAdder addTodo={addTodo} />
       {/* 검색 */}
       <TodoSearch todos={todos} setFilteredTodos={setFilteredTodos} />
