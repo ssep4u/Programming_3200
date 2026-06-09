@@ -3,6 +3,7 @@ import Checkbox from "./Checkbox.jsx"
 import Button from "./Button.jsx"
 
 export default function TodoItem({ todo, toggleTodo, deleteTodo, editTodo }) {
+    todo.date = new Date(todo.id).toLocaleString();
     const [isEditing, setIsEditing] = useState(false);  //수정중인지 아닌지
     const [editText, setEditText] = useState(todo.text);    //수정중인 text
     function handleEditClick() {
@@ -39,6 +40,7 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo, editTodo }) {
                     autoFocus
                 />
             }
+            <span>날짜 : {todo.date}</span>
             <Button
                 className="todo__button todo__button--edit"
                 onClick={handleEditClick}

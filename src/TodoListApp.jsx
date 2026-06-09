@@ -8,6 +8,8 @@ import TodoHeader from "./components/TodoHeader.jsx"
 import TodoAdder from "./components/TodoAdder.jsx"
 import TodoItem from "./components/TodoItem.jsx"
 import TodoList from "./components/TodoList.jsx"
+import TodoSearch from "./components/TodoSearch.jsx"
+import DateApp from './DateApp.jsx'
 
 class Todo {
   constructor(id, text, isCompleted) {
@@ -27,21 +29,26 @@ function TodoListApp() {
     return (!savedTodos) ? [] : JSON.parse(savedTodos); //string -> JSON 객체 또는 리스트
   }
   const [todos, setTodos] = useState(initTodos);
-  //todos 변경 시, LocalStorage에 todos 저장하자
+  const [filteredTodos, setFilteredTodos] = useState(initTodos);
   useEffect(() => {
     localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos)); //JSON 객체 또는 리스트 -> string
   }, [todos]);
+
+  useEffect(() => {
+    setFilteredTodos(todos);
+  }, [todos]);
+
 
 
   function addTodo(text) {
     //이전 todos에 newTodo 만들어서 추가하자 -> 그것을 setTodos() 하자
     setTodos((todos) => [
-      ...todos,     //todos에 있는 item을 다 꺼내서 새로운 리스트에 하나씩 넣자
-      new Todo(
+      new Todo( // 새로 추가하는 항목을 앞에 넣어 맨 위에 표시
         Date.now(), //id: 고유 ID 시간을 이용. == new Date().getTime()
         text,       //text: 할 일 내용
         false       //isCompleted: 할 일의 완료 여부. 초기값은 false
-      )
+      ),
+      ...todos     // 기존 항목들은 뒤로
     ]);
   }
   function toggleTodo(id) {
@@ -67,12 +74,24 @@ function TodoListApp() {
       )
     )
   }
+
   return (
     <div className="todo">
-      <TodoHeader />
+      
+      <TodoHeader /><DateApp/>
+    
       <TodoAdder addTodo={addTodo} />
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
+      {/* 검색 */}
+      <TodoSearch todos={todos} setFilteredTodos={setFilteredTodos} />
+      {/* 검색 결과 출력 */}
+      <TodoList
+        todos={filteredTodos}
+        toggleTodo={toggleTodo}
+        deleteTodo={deleteTodo}
+        editTodo={editTodo}
+      />
     </div>
+
   )
 }
 
